@@ -28,6 +28,7 @@ namespace EnchantedForest.Entities
         {
             rb = GetComponent<Rigidbody2D>();
             animator = GetComponent<Animator>();
+            Core.EcosystemManager.Instance?.RegisterAnimal(this);
         }
 
         protected virtual void Update()
@@ -61,6 +62,7 @@ namespace EnchantedForest.Entities
 
         public virtual void Die()
         {
+            Core.EcosystemManager.Instance?.UnregisterAnimal(this);
             Debug.Log($"{animalName} has died.");
             Destroy(gameObject);
         }
