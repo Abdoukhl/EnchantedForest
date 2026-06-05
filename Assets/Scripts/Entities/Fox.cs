@@ -58,6 +58,17 @@ namespace EnchantedForest.Entities
             }
         }
 
+        private void OnTriggerEnter2D(Collider2D other)
+        {
+            if (other.TryGetComponent<Rabbit>(out Rabbit rabbit))
+            {
+                hunger -= 0.5f;
+                hunger = Mathf.Clamp01(hunger);
+                Debug.Log($"{animalName} ate a rabbit! Hunger: {hunger:F2}");
+                rabbit.Die();
+            }
+        }
+
         private void Wander()
         {
             wanderTimer += Time.deltaTime;
